@@ -9,13 +9,16 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "vant": "^2.12.13",
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@vant/area-data": "^1.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "babel-plugin-import": "^1.13.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
@@ -32,7 +35,13 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "vue/no-unused-components": "off",
+      "no-unused-vars": [2, { 
+        "vars": "local",
+        "args": "none" 
+      }]
+    }
   },
   "browserslist": [
     "> 1%",
