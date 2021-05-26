@@ -5,6 +5,9 @@ import MyPlugin  from './utils/plugin.js'
 import './assets/css/base.css'
 Vue.config.productionTip = false
 
+import Vconsole from "vconsole";
+new Vconsole();
+
 Vue.use(MyPlugin);
 
 new Vue({
