@@ -6,8 +6,6 @@
                 <van-tab v-for="(item,index) in tabsList" :title="item.title" :key="index" :name="item.id">
                     <div class="home-container">
                         <Grids class="gard" :listData="detail"/>
-                        <!-- <Routergrid listData="detail"/>
-                        <Goodslist listData="detail"/> -->
                     </div>
                         
                 </van-tab>
@@ -55,7 +53,6 @@
         width: 100%;
         height: 100%;
         position: relative;
-        background-color: pink;
 
     }
 

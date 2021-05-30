@@ -30,7 +30,9 @@ export default {
     };
   },
   mounted() {
-    this.$img = document.getElementsByClassName('myimg')[0]
+    this.$nextTick(function () {
+      this.$img = document.getElementsByClassName('myimg')[0]
+    });
     this.image = "";
     this.mousePressed = false;
     // var lastX, lastY;
@@ -133,7 +135,7 @@ export default {
     clearArea() {
       this.ctx.setTransform(1, 0, 0, 1, 0, 0);
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-      this.$img.parentNode.removeChild(this.$img);
+      this.$img.src = "https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D450%2C600/sign=0522dd202e2eb938ec3872f6e052a903/21a4462309f79052c9e799ff0df3d7ca7acbd573.jpg";
     },
     // 提交签名
     saveSign() {
@@ -146,7 +148,7 @@ export default {
         return;
       } else {
         var image = this.c.toDataURL("image/png"); // 得到生成后的签名base64位  url 地址
-        console.log(image); // 打印图片base64 url
+        // console.log(image); // 打印图片base64 url
         this.$img.src = image;
       }
     },
@@ -189,6 +191,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 1.25rem;
     }
     .staging-btn {
       color: #4154ff;

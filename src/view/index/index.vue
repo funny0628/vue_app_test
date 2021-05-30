@@ -4,10 +4,10 @@
 
     <router-view></router-view>
     </div>
-    <dic class="topbar">
+    <div class="topbar">
 
     <Tabbar />
-    </dic>
+    </div>
   </div>
 </template>
 
