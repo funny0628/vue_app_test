@@ -7,6 +7,22 @@
                     <div class="home-container">
                         <Grids class="gard" :listData="detail"/>
                     </div>
+                    <div class="content">
+                        <a @click="targetOut" >点击跳转百度链接</a>
+                    </div>
+                    <div @click="aa" class="paixu">
+                        <div class="biaoti">标题</div>
+                        <p>内容</p>
+                        <p>内容</p>
+                        <p>内容</p>
+                        <div class="biaoti">标题</div>
+                        <p>内容</p>
+                        <p>内容</p>
+                        <div class="biaoti">标题</div>
+                        <p>内容</p>
+                        <p>内容</p>
+                        <p>内容</p>
+                    </div>
                         
                 </van-tab>
             </van-tabs>
@@ -43,6 +59,12 @@
             tabsChange(name,title){
                 this.detail = homeData[name]
             },
+            targetOut(){
+                window.location.href = 'http://www.baidu.com'; 
+            },
+            aa(e){
+                console.log('1111',e.target);
+            }
         }
 
     }
@@ -66,6 +88,30 @@
         display: flex;
         .gard {
             // width: 25%;
+        }
+    }
+    .home .content {
+        a::before{
+            content:counter(h)'.';
+        }
+        a{
+            counter-increment:h;
+        }
+    }
+    .home .paixu {
+        div::before{
+            content:"\2612" counter(h)'.';
+            display: inline-block;
+        }
+        div {
+            counter-increment:h;
+            counter-reset: a;
+        }
+        p::before{
+            content:counter(a)'.';
+        }
+        p {
+            counter-increment:a;
         }
     }
 </style>

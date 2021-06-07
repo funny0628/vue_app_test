@@ -24,10 +24,11 @@ export default {
   height: 100%;
   width: 100%;
   .top {
-    height: 90%;
+    height: 92%;
+    overflow: auto;
   }
   .topbar {
-    height: 10%;
+    height: 8%;
   }
 }
 </style>
