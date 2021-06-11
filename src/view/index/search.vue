@@ -13,6 +13,17 @@
     <div class="img">
       <img class="myimg" >
     </div>
+    <div class="imgPreview">
+      <ul>
+          <viewer class="infoImg" :images="imgList">
+            <li v-for="src in imgList">
+              <span>{{src.title}}</span>
+              <img  :src="src.url" :key="src.title">
+            </li>
+          </viewer>
+        
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -26,7 +37,29 @@ export default {
       ctx: "",
       lastX: 0,
       lastY: 0,
-      $img:''
+      $img:'',
+      imgList:[
+        {
+          url:'https://images.pexels.com/photos/844297/pexels-photo-844297.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          title:'红霞',
+          preview: '1'
+        },
+        {
+          url:'https://images.pexels.com/photos/6758350/pexels-photo-6758350.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          title:'床品',
+          preview: '1'
+        },
+        {
+          url:'https://images.pexels.com/photos/4011876/pexels-photo-4011876.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          title:'人物',
+          preview: '1'
+        },
+        {
+          url:'https://images.pexels.com/photos/1472999/pexels-photo-1472999.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          title:'cat',
+          preview: '1'
+        },
+      ]
     };
   },
   mounted() {
@@ -166,7 +199,7 @@ export default {
 <style lang="less" scoped>
 .page {
   width: 100%;
-  height: 100%;
+  height: 50%;
   .content {
     width: 100%;
     height: 40%;
@@ -208,6 +241,38 @@ export default {
     img {
       width: 100%;
       height: 100%;
+    }
+  }
+  .imgPreview {
+    ul {
+      list-style: none;
+      display: flex;
+      .infoImg {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          position: relative;
+
+          img {
+            position: relative;
+            width: 100px;
+            height: 50px;
+            opacity: 0;
+          }
+          span {
+            // width: 100%;
+            // height: 100%;
+            // text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid #ccc;
+            padding: 3px 5px;
+            border-radius: 3px;
+          }
+        }
+      }
     }
   }
 }
