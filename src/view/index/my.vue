@@ -145,11 +145,10 @@
       position: absolute;
       right: auto;
       border-width: 1px;
-      // border-left: 1px solid orange;
     }
 
     .el-tree-node:before {
-      border-left: 1px solid green;
+      border-left: 1px solid #000;
       bottom: 0px;
       height: 100%;
       top: -4px;
@@ -157,7 +156,7 @@
     }
 
     .el-tree-node:after {
-      border-top: 1px solid red;
+      border-top: 1px solid #000;
       height: 20px;
       top: 12px;
       width: 24px;
