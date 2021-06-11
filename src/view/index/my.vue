@@ -4,14 +4,13 @@
     <el-tree
       :data="data"
       node-key="id"
-      show-checkbox
+      
       :props="defaultProps">
-          <span class="custom-tree-node" slot-scope="{ node, data }">
-            <span>
-            <!--   data.icon为data里的icon属性，用于识别icon图片 -->
+          <!-- <span class="custom-tree-node" slot-scope="{ node, data }">
+            <span>show-checkbox
                 <i :class="data.XXX"></i>{{ node.label }}
             </span>              
-        </span>
+        </span> -->
 </el-tree>
   </div>
 </template>
@@ -79,9 +78,12 @@
 .my {
   /deep/ .el-tree {
     padding:2px;
+    box-sizing: border-box;
     .el-tree-node  {
+      position: relative;
+      padding-left: 16px;
       .el-tree-node__content {
-        margin: 3px 0;
+        padding-left: 0px !important;
         &:hover {
           background-color: #d5e7f3;
         }
@@ -110,6 +112,55 @@
           }
         }
       }
+    }
+
+    > .el-tree-node {
+      // padding-left: 0;
+    }
+
+    .el-tree-node:after {
+      // border-top: none;
+    }
+
+    .el-tree-node__children {
+      padding-left: 16px;
+      overflow: visible;
+    }
+
+    .el-tree-node :last-child:before {
+      height: 17px;
+    }
+
+    .el-tree-node__children .el-tree-node:before {
+      content: "";
+      left: -8px;
+      position: absolute;
+      right: auto;
+      border-width: 1px;
+    }
+
+    .el-tree-node__children .el-tree-node:after {
+      content: "";
+      left: -8px;
+      position: absolute;
+      right: auto;
+      border-width: 1px;
+      // border-left: 1px solid orange;
+    }
+
+    .el-tree-node:before {
+      border-left: 1px solid green;
+      bottom: 0px;
+      height: 100%;
+      top: -4px;
+      width: 1px;
+    }
+
+    .el-tree-node:after {
+      border-top: 1px solid red;
+      height: 20px;
+      top: 12px;
+      width: 24px;
     }
   }
 }
