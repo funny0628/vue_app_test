@@ -4,21 +4,54 @@
     <el-tree
       :data="data"
       node-key="id"
-      
       :props="defaultProps">
-          <!-- <span class="custom-tree-node" slot-scope="{ node, data }">
-            <span>show-checkbox
-                <i :class="data.XXX"></i>{{ node.label }}
-            </span>              
-        </span> -->
-</el-tree>
+    </el-tree>
+    <!-- @功能 -->
+    <div>
+      <vue-tribute :options="tributeOptions">
+        <div class="infoInput"  v-html="text" type="text" placeholder="@..." @input="inputEvent"></div>
+      </vue-tribute>
+      <button @click="getValue">获取文本</button>
+    
+    <!-- 异步组件使用 -->
+      <div v-if="Show">
+        <AsyncComponent />
+      </div>
+      
+    </div>
   </div>
 </template>
 
 <script>
+import VueTribute from 'vue-tribute'
+
+// 异步组件使用
+import ErrorComponent from '../../components/layout/ErrorComponent.vue'
+import LoadingComponent from '../../components/layout/LoadingComponent.vue'
+const AsyncComponent = () => ({
+  // 需要加载的组件 (应该是一个 `Promise` 对象)
+  component: import('./test.vue'),
+  // 异步组件加载时使用的组件
+  loading: LoadingComponent,
+  // 加载失败时使用的组件
+  error: ErrorComponent,
+  // 展示加载时组件的延时时间。默认值是 200 (毫秒)
+  delay: 500,
+  // 如果提供了超时时间且组件加载也超时了，
+  // 则使用加载失败时使用的组件。默认值是：`Infinity`
+  timeout: 4000
+})
+
   export default {
+    components: {
+      VueTribute,
+      AsyncComponent,//异步组件使用
+    },
     data() {
       return {
+        Show:false,
+        aa:'',
+        text:'',
         data: [{
           id: 1,
           label: '一级 1',
@@ -57,24 +90,57 @@
         defaultProps: {
           children: 'children',
           label: 'label'
+        },
+        tributeOptions:{
+          trigger: '@',
+          list: [
+            { key: "Phil Heartman", value: "pheartman" },
+            { key: "Gordon Ramsey", value: "gramsey" },
+            { key: "Gordon 11", value: "111" },
+            { key: "Gordon 22", value: "222" },
+            { key: "Gordon 33", value: "333" },
+            { key: "Gordon 44", value: "444" },
+            { key: "Gordon 55", value: "555" },
+            { key: "Gordon 66", value: "666" },
+            { key: "Gordon 77", value: "777" },
+            { key: "Gordon 88", value: "888" },
+            { key: "Gordon 99", value: "999" },
+          ],
+          values:function (text, cb) {
+            this.remoteSearch(text, users => cb(users));
+          },
+          selectTemplate: function (item) {
+            // return '@' + item.original.value;
+            console.log(item,'---');
+            return `<span style='color:#2F75BE'> @${item.original.value}</span>`;
+          },
         }
       };
-    }
+    },
+    methods: {
+      remoteSearch(){
+        setTimeout(() => {
+          if(this.list.length > 0){
+            cb(this.list);
+          }else{
+            cb([]);
+          }
+        }, 500);
+      },
+      inputEvent(e){
+        console.log(e,e.target.innerHTML);
+        this.aa = e.target.innerHTML;
+      },
+      getValue(){
+        this.text = this.aa;
+        console.log(this.text);
+        this.Show = true;
+      }
+    },
   };
 </script>
 
 <style lang="scss" scoped>
-@each $name in XXX{
-  .#{$name}-icon {
-    background-image: url("https://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E5%85%B3%E9%97%AD%E5%9B%BE%E7%89%87&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2594960388,3632675066&os=3532038233,1811075004&simid=4148401967,453277862&pn=2&rn=1&di=113850&ln=1080&fr=&fmq=1622085987153_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&hs=2&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%253A%252F%252Fku.90sjimg.com%252Felement_origin_min_pic%252F01%252F51%252F89%252F805745d94f6f927.jpg%26refer%3Dhttp%253A%252F%252Fku.90sjimg.com%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1624677986%26t%3Db1296ea0d731c7ce0f62e1c44ccfc872&rpstart=0&rpnum=0&adpicid=0&force=undefined");
-    background-repeat: no-repeat;
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    vertical-align: middle;
-  
-  }
-}
 .my {
   /deep/ .el-tree {
     padding:2px;
@@ -162,7 +228,23 @@
       width: 24px;
     }
   }
+  
 }
+</style>
+<style lang="scss" >
+.infoInput {
+  border: 1px solid #ccc;
+  height: 20px;
+  line-height: 20px;
+}
+  .tribute-container {
+    max-height: 100px;
+    overflow-y: auto;
+    border:1px solid #ccc ;
+    background-color: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+  }
 </style>
 
 
