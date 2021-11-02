@@ -7,6 +7,7 @@ import MyPlugin  from './utils/plugin.js'
 import './assets/css/base.css'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import {store} from './utils/store'
 
 // import Viewer from 'v-viewer'
 // import 'viewerjs/dist/viewer.css'
@@ -37,5 +38,6 @@ Vue.use(MyPlugin);
 
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

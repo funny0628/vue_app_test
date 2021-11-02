@@ -3,6 +3,7 @@
     <p>more</p>
     <button @click="startRecord">开始录音</button>
     <button @click="stopRecord">结束录音</button>
+    <div>{{$store.state.count}}</div>
   </div>
 </template>
 

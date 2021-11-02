@@ -19,10 +19,18 @@
       </div>
       
     </div>
+
+    <!-- vuex/模块化体验 -->
+    <hr>
+    <div class="vuex">
+      <!-- <Tap /> -->
+      <Page />
+    </div>
   </div>
 </template>
 
 <script>
+import Page from './comment/page.vue'
 import VueTribute from 'vue-tribute'
 
 // 异步组件使用
@@ -46,6 +54,7 @@ const AsyncComponent = () => ({
     components: {
       VueTribute,
       AsyncComponent,//异步组件使用
+      Page,
     },
     data() {
       return {
