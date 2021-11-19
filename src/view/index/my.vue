@@ -26,12 +26,40 @@
       <!-- <Tap /> -->
       <Page />
     </div>
+    <hr>
+    <hr>
+    <div style="marginTop:20px">11</div>
+    <!-- 渲染函数练习 -->
+    <div>
+      <!-- 原始渲染函数的写法->麻烦,冗杂 -->
+      <Vnode :columns="columns"/>
+    </div>
+    <div style="marginTop:20px"></div>
+    <!-- 安装包使用jsx -->
+    <div>
+      <Jsx
+        :data="searchConf"
+        @submit="jsxSubmit"
+        @reset="jsxReset"
+      />
+    </div>
+    <div style="marginTop:20px"></div>
+    <!-- 表格的简化写法 -->
+    <button @click="$router.push({name:'selftabel'})">selfTabel</button> <span style="marginLeft:20px"></span>
+    <button @click="$router.push({name:'select'})">select</button>
+    <div style="marginTop:20px"></div>
+    <div>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+import Vnode from './vnode.vue'
+import Jsx from './jsx.vue'
 import Page from './comment/page.vue'
 import VueTribute from 'vue-tribute'
+import {columns} from './vnode.js'
 
 // 异步组件使用
 import ErrorComponent from '../../components/layout/ErrorComponent.vue'
@@ -55,9 +83,51 @@ const AsyncComponent = () => ({
       VueTribute,
       AsyncComponent,//异步组件使用
       Page,
+      Vnode,
+      Jsx,
     },
     data() {
       return {
+        searchConf:[
+          {
+            key:'name',
+            label:"我是input",
+            formEl:'input',
+            placeholder:'请输入内容',
+            className:"el-icon-warning",
+            value:'',
+            maxlength:'10',
+            fn:()=>{},
+            change: () => this.changeName(0),
+            slot: (h) => {
+              return (
+                <el-button slot="append" onClick={this.selectAssessUnit}>
+                  选 择
+                </el-button>
+              );
+            },
+          },
+          {
+            key:'type',
+            label:"我是select",
+            formEl:'select',
+            placeholder:'请输入内容',
+            filterable: true,
+            remote: true,
+            value:'',
+            data:[],
+            "remote-method": (query) => this.remoteMethod(query, 1),
+            change: () => this.changeName(1),
+          }
+        ],
+        columns:columns,
+        style:{
+          color: 'red',
+          fontSize: '14px'
+        },
+        // border:{
+        //   border:'1px solid #ccc'
+        // },
         Show:false,
         aa:'',
         text:'',
@@ -126,7 +196,45 @@ const AsyncComponent = () => ({
         }
       };
     },
+    created () {
+    },
     methods: {
+      // jsx--------------------------------------------------------
+      jsxReset(){
+        console.log('重置....');
+      },
+      jsxSubmit(){
+        console.log('提交了....',this.searchConf);
+
+      },
+      selectAssessUnit(){
+        console.log('我是input中的按钮的点击事件');
+      },
+      changeName(type){
+        console.log('这里是统一的change事件',type);
+      },
+      remoteMethod(query,type){
+        console.log(query,'这里是select的远程搜索事件-----');
+        setTimeout(() => {
+          this.searchConf[type].data =  [{
+                value: '选项1',
+                label: '黄金糕'
+              }, {
+                value: '选项2',
+                label: '双皮奶'
+              }, {
+                value: '选项3',
+                label: '蚵仔煎'
+              }, {
+                value: '选项4',
+                label: '龙须面'
+              }, {
+                value: '选项5',
+                label: '北京烤鸭'
+              }]
+        }, 1000);
+      },
+       // jsx--------------------------------------------------------
       remoteSearch(){
         setTimeout(() => {
           if(this.list.length > 0){
@@ -150,6 +258,9 @@ const AsyncComponent = () => ({
 </script>
 
 <style lang="scss" scoped>
+.border {
+          border:'1px solid #ccc'
+        }
 .my {
   /deep/ .el-tree {
     padding:2px;

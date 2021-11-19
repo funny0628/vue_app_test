@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./com.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body>
+  <script>
+    
+    (function(){
+      let $body = document.getElementsByTagName('body')[0];
+      let $head = document.getElementsByTagName('head')[0];
+      console.log( $head,$head.appendChild,' $head');
+      com.map(item=>{
+        if(item.indexOf('.js') != -1){
+          let $script = document.createElement('script');
+          $script.src = item + '?t=' + new Date().getTime();
+          $body.appendChild($script);
+        }else if(item.indexOf('.css') !=-1){
+          let $link = document.createElement('link');
+          $link.href = item + '?t=' + new Date().getTime();
+          $head.appendChild($link);
+        }
+      })
+    })()
+    </script>
+  <div>
+    123123123qeqweqwe
+  </div>
+  
+</body>
+</html>
+<!-- 
+  如果是使用的网络地址的script文件,网速过慢或者是地址不存在之后会影响页面html的正常展示,需要放在body的最后面,
+ -->

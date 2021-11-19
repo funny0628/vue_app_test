@@ -11,24 +11,41 @@ const routes = [
         redirect: '/home',
         children:[
             {
-                path:'home',
+                path:'/home',
                 name:'home',
                 component: () => import('../view/index/home.vue')
             },
             {
-                path:'search',
+                path:'/search',
                 name:'search',
                 component: () => import('../view/index/search.vue')
             },
             {
-                path:'more',
+                path:'/more',
                 name:'more',
                 component: () => import('../view/index/more.vue')
             },
             {
-                path:'my',
+                path:'/my',
                 name:'my',
-                component: () => import('../view/index/my.vue')
+                component: () => import('../view/index/index.vue'),
+                children:[
+                    {
+                        path:'',
+                        name:'my',
+                        component: () => import('../view/index/my.vue'),
+                    },
+                    {
+                        path:'selftabel',
+                        name:'selftabel',
+                        component: () => import('../view/index/myCom/selfTabel.vue'),
+                    },
+                    {
+                        path:'select',
+                        name:'select',
+                        component: () => import('../view/index/myCom/select.vue'),
+                    },
+                ]
             },
         ]
     },

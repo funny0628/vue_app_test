@@ -13,6 +13,7 @@
     "element-ui": "^2.15.1",
     "less": "^4.1.1",
     "less-loader": "^5.0.0",
+    "lodash": "^4.17.21",
     "tributejs": "^5.1.3",
     "v-viewer": "^1.6.3",
     "vant": "^2.12.13",
